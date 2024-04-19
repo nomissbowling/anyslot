@@ -1,0 +1,30 @@
+[package]
+name = "anyslot"
+version = "0.0.1" # change with html_root_url in lib.rs
+edition = "2021"
+authors = ["nomissbowling <nomissbowling@yahoo.co.jp>"]
+
+description = "global bridge c-bindings of any type slot for Rust"
+keywords = ["c", "cpp", "global", "anytype", "slot"]
+categories = ["development-tools", "external-ffi-bindings"]
+license = "MIT"
+
+documentation = "https://docs.rs/anyslot/"
+homepage = "https://crates.io/crates/anyslot"
+repository = "https://github.com/nomissbowling/anyslot"
+
+readme = "README.md"
+
+#build = "build.rs"
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[dependencies]
+home = { version = "=0.5.5" } # cc(1.0.79)/bindgen(0.65.1) requires home(0.5.5)
+
+[build-dependencies]
+cc = "=1.0.79"
+bindgen = "=0.65.1"
+
+[package.metadata.docs.rs]
+rustc-args = ["--cfg", "docsrs"]
