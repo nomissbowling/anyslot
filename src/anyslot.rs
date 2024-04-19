@@ -1,5 +1,5 @@
 //! global bridge c-bindings of any type slot for Rust
-//! anyslot integrates bindings to cppbridge and canyslot
+//! anyslot integrates bindings to cppbridge
 //!
 //! - cc-rs https://crates.io/crates/cc
 //! - bindgen https://crates.io/crates/bindgen
@@ -46,7 +46,13 @@ impl TBridgeGlobal for bridge_global {
 #[macro_export]
 macro_rules! any_pinned_init_slots {
   ($n: expr) => {
-    unsafe { bridge_global_init_slots($n) }
+    unsafe {
+      let r = bridge_global_init_slots($n);
+      if r == 0 {
+        panic!("not allocated area: bridge_global_init_slots");
+      }
+      r
+    }
   }
 }
 pub use any_pinned_init_slots;
@@ -55,7 +61,13 @@ pub use any_pinned_init_slots;
 #[macro_export]
 macro_rules! any_pinned_dispose_slots {
   () => {
-    unsafe { bridge_global_dispose_slots() }
+    unsafe {
+      let r = bridge_global_dispose_slots();
+      if r == 0 {
+        panic!("something wrong to free: bridge_global_dispose_slots");
+      }
+      r
+    }
   }
 }
 pub use any_pinned_dispose_slots;
