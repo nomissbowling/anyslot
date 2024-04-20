@@ -97,7 +97,7 @@ pub trait TGlobalSetGet<T> {
   /// set bg
   fn set_bg_mut(&mut self, n: usize);
   /// with bg
-  fn with_bg_mut<F>(n: usize, f: F) where F: Fn(&mut T) -> ();
+  fn with_bg_mut<F>(n: usize, f: F) where F: FnMut(&mut T) -> ();
 }
 
 /// TGlobalSetGet for Pin<&mut Arc<RefCell<T>>>
@@ -113,7 +113,7 @@ impl<T> TGlobalSetGet<T> for Pin<&mut Arc<RefCell<T>>> {
     }
   }
   /// with bg
-  fn with_bg_mut<F>(n: usize, f: F) where F: Fn(&mut T) -> () {
+  fn with_bg_mut<F>(n: usize, mut f: F) where F: FnMut(&mut T) -> () {
     f(unsafe {
       let p = bridge_global_getter(n);
       if p == 0 as *mut bridge_global {

@@ -59,8 +59,10 @@ pub fn minimum_test() {
   });
 
   // may be in another thread (bg: &mut CustomSlotSample)
+  let mut col = CustomSlotSample::void();
   any_pinned_with_bg_mut!(CustomSlotSample, 1, |bg| {
     println!("{:?}", bg);
+    col = bg.clone();
   });
 
   // dispose at main thread

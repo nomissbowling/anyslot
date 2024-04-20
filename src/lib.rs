@@ -1,4 +1,4 @@
-#![doc(html_root_url = "https://docs.rs/anyslot/0.1.0")]
+#![doc(html_root_url = "https://docs.rs/anyslot/0.1.1")]
 //! global bridge c-bindings of any type slot for Rust
 //!
 
